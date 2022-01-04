@@ -1,13 +1,23 @@
 <template>
-    
-    <v-app id="inspire">
 
-        <v-navigation-drawer v-model="drawer"
-                             app dark>
+    <v-app id="inspire">
+        <!-- <v-system-bar app>
+            <template>
+                <v-progress-linear value="25"></v-progress-linear>
+            </template>
+            <v-spacer></v-spacer>
+
+            <v-icon>mdi-square</v-icon>
+
+            <v-icon>mdi-circle</v-icon>
+
+            <v-icon>mdi-triangle</v-icon>
+        </v-system-bar>-->
+        <v-navigation-drawer v-model="drawer" app dark >
             <!--  -->
 
             <v-card>
-                <v-list>
+                <v-list >
                     <v-list-group v-for="item in navItems"
                                   :key="item.title"
                                   v-model="item.active"
@@ -30,17 +40,27 @@
             </v-card>
         </v-navigation-drawer>
 
-        <v-app-bar elevation="2" app dark>
+
+        <v-app-bar app dark >
             <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+            <v-toolbar-title >Application</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-tabs centered >
+                <v-tab v-for="link in links"
+                       :key="link">
+                    {{ link }}
+                </v-tab>
+            </v-tabs>
+            <v-spacer></v-spacer>
 
-            <v-toolbar-title>Application</v-toolbar-title>
-
+            <v-responsive  >
+                <v-text-field hide-details
+                              solo-inverted></v-text-field>
+            </v-responsive>
         </v-app-bar>
-        
+
         <v-main>
-            <template>
-                <v-progress-linear value="15"></v-progress-linear>
-            </template>
+
             <template>
                 <v-card>
                     <v-container>
@@ -60,11 +80,7 @@
                                         <v-card flat>
                                             <template>
                                                 <v-card>
-
-                                                    
-
                                                     <v-list three-line>
-                                                        
                                                         <template v-for="(item, index) in tabContentItems">
 
                                                             <v-subheader v-if="item.header"
@@ -77,9 +93,12 @@
 
                                                             <v-list-item v-else
                                                                          :key="item.title">
+                                                                <!--
                                                                 <v-list-item-avatar>
                                                                     <v-img :src="item.avatar"></v-img>
                                                                 </v-list-item-avatar>
+
+                                                                -->
 
                                                                 <v-list-item-content>
                                                                     <v-list-item-title v-html="item.title"></v-list-item-title>
@@ -295,6 +314,12 @@
                     title: 'Recipe to try 3',
                     subtitle: '<span class="text--primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
                 },
+            ],
+            links: [
+                'Time',
+                'Projects',
+                'Team',
+                'Reports',
             ],
 
         }),
